@@ -7,9 +7,10 @@ http.createServer(function(request, response){
     if(request.url !== "/"){
         // получаем путь после слеша
         filePath = request.url.substring(1);
+        console.log(filePath)
     }
-    fs.readFile(filePath, function(error, data){
-               
+
+    fs.readFile(filePath, function(error, data){               
         if(error){
                    
             response.statusCode = 404;

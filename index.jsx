@@ -1,34 +1,35 @@
-class Test extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {class: 1};
+const Router = ReactRouterDOM.BrowserRouter;
+const Route = ReactRouterDOM.Route;
+const Routes = ReactRouterDOM.Routes;
 
-        this.press = this.press.bind(this);    
-        this.reset = this.reset.bind(this);     
-    }
+function TestHookClick(){
+    const [user, setUser] = React.useState({name: "Test", age: 0});
 
-    press(){
-        let number = this.state.class;
-        this.setState({class: ++number});
-    }
+    React.useEffect(()=>{
+        document.title = user.name;
+    });
 
-    reset(){
-        this.setState({class: 1});
-    }
-
-    render(){
-        return <div>
-                <div>
-                    <button type="button" class="btn btn-primary m-2" onClick={this.press}>Нажми</button>
-                </div>
-                <div>
-                    <button class="btn btn-primary m-2" onClick={this.reset}>Сбросить</button>
-                </div>              
-                <p class="m-2">Счетчик: {this.state.class}</p>
-               </div>        
-    }
+    return <div>
+                <button onClick={()=>{setUser({name: user.name + user.age, age: user.age + 1})}} class="btn btn-primary m-2">Press</button>
+                <button onClick={()=>{setUser({name: "Test", age: 0})}} class="btn btn-primary m-2">Reset</button>
+                <p>age: {user.age}</p>
+                <p>age: {user.name}</p>
+           </div>
 }
 
-ReactDOM.render(<Test />, document.getElementById("root"))
+function About(){
+    return <h1>About</h1>
+}
+
+ReactDOM.render(<Router>
+                    <div>
+                        <Routes>
+                            <Route path="/" element={<TestHookClick/>}/>
+                            <Route path="/about" element={<About/>}/>
+                        </Routes>
+                    </div>
+                </Router>, document.getElementById("root"))
+
+//ReactDOM.render(<TestHookClick />, document.getElementById("root"))
 
 

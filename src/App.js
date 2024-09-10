@@ -1,49 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCustomerAction, removeCustomerAction } from './store/customerReducer';
+import { addCashAction, getCashAction } from './store/cashReducer';
 
-function Square({value, onSquareClick}) { 
-  return <button onClick={onSquareClick} className="square">{value}</button>;
-}
+function App() {
+  const dispatch = useDispatch();
+  const cash = useSelector(state=> state.cashReducer.cash);
+  const customers = useSelector(state=> state.customersReducer.customers);
 
-function Board() {
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const addCash =()=>{
+    dispatch(addCashAction(100));
+  }
 
-  function handleClick(i) {
-    if (squares[i]) {
-      return;
+  const getCash =()=>{
+    dispatch(getCashAction(50));
+  }
+
+  const addCustomer = (name)=>{
+    const customer = {
+      name: name,
+      id: Date.now()
     }
-    const nextSquares = squares.slice();
-    if (xIsNext) {
-      nextSquares[i] = "X";
-    } else {
-      nextSquares[i] = "O";
-    }
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    dispatch(addCustomerAction(customer));
+  }
+
+  const removeCustomer = (customer)=> {
+    dispatch(removeCustomerAction(customer.id))
   }
 
   return (
-    <>
-      <div className='board-row'>
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} /> 
+      <div>
+        <button onClick={()=> addCash()} className='btn btn-primary m-2'>Add cash</button>
+        <button onClick={()=> getCash()} className='btn btn-primary m-2'>Get cash</button>
+        <button onClick={()=> addCustomer(prompt())} className='btn btn-primary m-2'>Add customer</button>
+        <button onClick={()=> removeCustomer()} className='btn btn-primary m-2'>Remove customer</button>
+        <p type="text" className='m-2'>{cash}</p>
+        {
+          customers.length > 0 ?
+          <div className='m-2'>
+            {customers.map(customer=>
+              <div onClick={()=>removeCustomer(customer)}>{customer?.name}</div>
+            )}
+          </div>
+            :
+          <div>
+            <p className='m-2'>Клиенты отсутстсуют!</p>
+          </div>
+        }
       </div>
-      <div className='board-row'>
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} /> 
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} /> 
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className='board-row'>
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />  
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
-    </>
-    
   );
 }
 
-export default Board;
+export default App;

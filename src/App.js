@@ -35,12 +35,11 @@ function App() {
         <button onClick={()=> getCash()} className='btn btn-primary m-2'>Get cash</button>
         <button onClick={()=> addCustomer(prompt())} className='btn btn-primary m-2'>Add customer</button>
         <button onClick={()=> removeCustomer()} className='btn btn-primary m-2'>Remove customer</button>
-        <button onClick={()=> dispatch(fetchCustomers())} className='btn btn-primary m-2'>Get customers from api</button>
+        <button onClick={()=> fetchCustomers(dispatch)} className='btn btn-primary m-2'>Get customers from api</button>
         <p type="text" className='m-2'>{cash}</p>
         {
           customers.length > 0 ?          
-          <div className='m-2'>
-            {console.log(customers)}
+          <div className='m-2'>            
             {customers.map(customer=>
               <div key={customer.id} onClick={()=>removeCustomer(customer)}>{customer.name}</div>
             )}

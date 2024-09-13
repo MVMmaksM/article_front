@@ -1,9 +1,8 @@
-import { addManyCustomersAction } from "../store/customerReducer"
+import { addManyCustomersAction } from "../store/customerReducer";
+import {get} from "../api/fetch";
 
-export const fetchCustomers = () => {
-    return function(dispatch){
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(json => dispatch(addManyCustomersAction(json)));
-    }          
+export const fetchCustomers = async (dispatch) => {    
+
+    const responceData = await get('https://jsonplaceholder.typicode.com/users');
+    dispatch(addManyCustomersAction(responceData));             
 }

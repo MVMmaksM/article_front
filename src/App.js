@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCustomerAction, removeCustomerAction } from './store/customerReducer';
 import { addCashAction, getCashAction } from './store/cashReducer';
 import { fetchCustomers } from './asyncAction/customers';
+import Button from './components/button.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
 
   return (
       <div>
+        <Button on_click={()=>fetchCustomers(dispatch)} name_button="Test" class_button="btn btn-primary"></Button>
         <button onClick={()=> addCash()} className='btn btn-primary m-2'>Add cash</button>
         <button onClick={()=> getCash()} className='btn btn-primary m-2'>Get cash</button>
         <button onClick={()=> addCustomer(prompt())} className='btn btn-primary m-2'>Add customer</button>
@@ -41,7 +43,7 @@ function App() {
           customers.length > 0 ?          
           <div className='m-2'>            
             {customers.map(customer=>
-              <div key={customer.id} onClick={()=>removeCustomer(customer)}>{customer.name}</div>
+              <div key={customer.article_id} onClick={()=>removeCustomer(customer)}>#{customer.article_id} Название: {customer.title} Автор: {customer.author_str}</div>
             )}
           </div>
             :

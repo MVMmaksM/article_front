@@ -3,7 +3,17 @@ import { store } from "../store";
 
 export const get = async(baseUrl, mapQueryParams)=> {
     const fullUrl = baseUrl + '?' + queryParamsToUrlParams(mapQueryParams);
-    const responce = await fetch(fullUrl);
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "MjZjZTQwYTk3OWY1ZDE3NjQwMTgyMzA4M2RiZDlkYmU=");
+
+    const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+        mode: "cors"
+    };
+
+    const responce = await fetch(baseUrl, requestOptions);
     const responceData = await responce.json();
 
     return responceData;

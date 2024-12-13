@@ -40,7 +40,7 @@ function App() {
   }
       
   function Main(){
-      return <h2>Главная</h2>;
+      return (<h2>Test</h2>);
   }
 
   return (

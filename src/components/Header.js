@@ -5,7 +5,7 @@ import Auth from "./Auth";
 
 const Header=(props)=>{
     return (<div>
-                 <header class="p-3 bg-dark text-white">
+                 <header class="p-3 text-white">
                     <div class="container">
                         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">                                                      
                             <Nav />       
@@ -18,8 +18,8 @@ const Header=(props)=>{
                     <hr/>               
                 </header>                           
                 <div class="bg-dark text-white">
-                    <Outlet />
-                </div>
+                    <Outlet />                   
+                </div>        
                 <Footer />
             </div>
            )

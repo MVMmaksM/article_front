@@ -1,5 +1,6 @@
 const Footer=()=>{
-    return(<footer class="fixed-bottom p-3 bg-dark text-white">
+    return( 
+            <footer class="p-3 bg-dark text-white border-top border-secondary">
                 <div class="container">
                         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">                                                      
                            <p class="text-secondary">Test {new Date().getFullYear()}</p>

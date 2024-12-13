@@ -7,16 +7,18 @@ import Button from './components/button.js';
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Header from './components/Header.js';
 import Main from "./components/pages/Main.js";
-import ArticlesPage from "./components/pages/articles/ArticlesPage.js";
+import IndexArticle from "./components/pages/articles/IndexArticle.js";
 import Authors from "./components/pages/Authors.js";
 import About from "./components/pages/About.js";
 import Profile from './components/pages/Profile.js';
 import NotFound from './components/pages/Not found.js';
+import {store} from "./store/index.js";
+import { Provider } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
   const cash = useSelector(state=> state.cashReducer.cash);
-  const customers = useSelector(state=> state.customersReducer.customers);
+  const customers = useSelector(state=> state.customersReducer.getArticles);
 
   const addCash =()=>{
     dispatch(addCashAction(100));
@@ -39,19 +41,20 @@ function App() {
   }  
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Header/>}>  
-          <Route path="/" element={<Main/>}/>
-          <Route path='articles/*' element={<ArticlesPage />}/>
-          <Route path='authors' element={<Authors />}/>
-          <Route path='about' element={<About />}/>
-          <Route path='profile' element={<Profile />}/>
-          <Route path='/*' element={<NotFound />}/>
-        </Route>      
-      </Routes> 
-    </BrowserRouter>
-         
+      <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Header/>}>  
+                <Route path="/" element={<Main/>}/>
+                <Route path='articles/*' element={<IndexArticle />}/>
+                <Route path='authors' element={<Authors />}/>
+                <Route path='about' element={<About />}/>
+                <Route path='profile' element={<Profile />}/>
+                <Route path='/*' element={<NotFound />}/>
+              </Route>      
+            </Routes> 
+          </BrowserRouter>
+        </Provider>         
   );
 }
 

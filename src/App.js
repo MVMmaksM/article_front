@@ -6,6 +6,12 @@ import { fetchCustomers } from './asyncAction/customers';
 import Button from './components/button.js';
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Header from './components/Header.js';
+import Main from "./components/pages/Main.js";
+import ArticlesPage from "./components/pages/articles/ArticlesPage.js";
+import Authors from "./components/pages/Authors.js";
+import About from "./components/pages/About.js";
+import Profile from './components/pages/Profile.js';
+import NotFound from './components/pages/Not found.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,24 +36,18 @@ function App() {
 
   const removeCustomer = (customer)=> {
     dispatch(removeCustomerAction(customer.id))
-  }
-
-  function About(){
-    return <h2>О сайте</h2>;
-  }
-  function NotFound(){
-      return <h2>Ресурс не найден</h2>;
-  }
-      
-  function Main(){
-      return (<h2>Test</h2>);
-  }
+  }  
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Header/>}>  
-          <Route path="articles" element={<Main/>}/>
+          <Route path="/" element={<Main/>}/>
+          <Route path='articles/*' element={<ArticlesPage />}/>
+          <Route path='authors' element={<Authors />}/>
+          <Route path='about' element={<About />}/>
+          <Route path='profile' element={<Profile />}/>
+          <Route path='/*' element={<NotFound />}/>
         </Route>      
       </Routes> 
     </BrowserRouter>

@@ -1,24 +1,26 @@
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchArticles } from "../../../../asyncAction/articles.js"
+import { getArticlesAction } from "../../../../asyncAction/articles.js"
 import { useEffect } from "react";
+import Button from "../../../Button.jsx"
 
 const ArticlesList = ()=>{
     const dispatch = useDispatch();
-    const articles = useSelector(state=> state.articlesReducer);  
+    const articles = useSelector(state=> state.articlesReducer); 
+    console.log(articles) 
     useEffect(()=>{
-        fetchArticles(dispatch);
+        getArticlesAction(dispatch);
     }, []);   
 
     return(<>
             <div class="min-vh-100">                
                 <NavLink to="create" style={{ textDecoration: 'none'}}>
-                    <button type="button" title="Создать статью" class="m-3 btn btn-outline-light">Создать</button>                    
+                        <Button name="Создать" title="создать статью" class="m-3 btn btn-outline-light"/>        
                 </NavLink>      
                 {         
                     articles.articles[0]?.length > 0 ?       
                     <div class="container">         
-                        <div className='col-12 col-lg-12 me-lg-12 mb-2 justify-content-center mb-md-0'>                                       
+                        <div class='col-12 col-lg-12 me-lg-12 mb-2 justify-content-center mb-md-0'>                                       
                             {articles.articles[0].map(article=>                                                    
                                 <div class="m-3 p-3 border border-1 border-secondary rounded-3" key={article.article_id}> 
                                     <div class="row p-3">
@@ -46,8 +48,12 @@ const ArticlesList = ()=>{
                                     </div> 
                                     <div class="row pl-3 pt-3 pr-3 pb-0">
                                         <div class="col-3">
-                                                <span title="количество просмотров" class="text-left text-secondary p-3 fs-6"><i class="bi bi-eye-fill"></i> {article.count_view}</span>  
-                                                <span title="количество комментариев" class="text-left inline text-secondary fs-6"><i class="bi bi-chat-fill"></i> {article.count_comments}</span>                                             
+                                                <span title="количество просмотров" class="text-left text-secondary p-3 fs-6">
+                                                    <i class="bi bi-eye-fill"></i> {article.count_view}
+                                                </span>  
+                                                <span title="количество комментариев" class="text-left inline text-secondary fs-6">
+                                                    <i class="bi bi-chat-fill"></i> {article.count_comments}
+                                                </span>                                             
                                         </div>                                        
                                     </div>                                 
                                 </div>)}                           

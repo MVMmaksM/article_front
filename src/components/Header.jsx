@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
-import Nav from "./Nav";
-import Footer from "./Footer";
-import Auth from "./Auth";
+import Nav from "./Nav.jsx";
+import Footer from "./Footer.jsx";
+import Auth from "./Auth.jsx";
 
 const Header=(props)=>{
     return (<div>

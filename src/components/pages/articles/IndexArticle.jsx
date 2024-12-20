@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import ArticlesList from "../articles/components/ArticlesList.js";
-import ArticleDetail from "../articles/components/ArticleDetail.js"
-import CreateArticle from "../articles/components/CreateArticle.js";
+import ArticlesList from "../articles/components/ArticlesList.jsx";
+import ArticleDetail from "../articles/components/ArticleDetail.jsx"
+import CreateArticle from "../articles/components/CreateArticle.jsx";
 
 const IndexArticle = ()=>{
     return(<Routes>

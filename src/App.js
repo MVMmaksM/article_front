@@ -1,4 +1,5 @@
 import './App.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCustomerAction, removeCustomerAction } from './store/customerReducer';
 import { addCashAction, getCashAction } from './store/cashReducer';
